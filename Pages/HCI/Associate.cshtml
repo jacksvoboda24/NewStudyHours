@@ -1,0 +1,54 @@
+﻿@page
+@model PhiKapStudyHours.Pages.HCI.AssociateModel
+@{
+}
+<link rel="stylesheet" href="~/css/site.css">
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style>
+    .progress-bar {
+        position: relative;
+        width: 50%;
+        height: 50px;
+        border: 1px solid #000;
+    }
+
+    .progress-bar-fill {
+        height: 100%;
+        background: #4cff00;
+        transition: width 0.5s;
+    }
+    @* I am unsure why the progress bar is not becoming green, the background should set its color to that *@
+
+    .progress-bar-value {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<header class="PhiKapp">
+    <img class="center-fit" src="~/images/PhiKappaThetaCrest.jpg" height="50" width="auto" />
+    <button>Home</button>
+    Logged in as: Jack Svoboda
+    <button>Log Out</button>
+</header>
+<body class="PhiKapp">
+    <h1>Associate Member Home Page</h1>
+    <div class="progress" style="width:400px; height:auto; color:black">
+        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="@Model.percent_hours"
+             aria-valuemin="0" aria-valuemax="100" style="width:@Model.width_hours">
+            @Model.hours hours complete
+        </div>
+    </div>
+    <div>
+        Recently Approved Study Hours:
+        <div>
+            4.0 hours Ian Broyles 10/9/2021
+        </div>
+        <div>
+            0.5 hours Ian Broyles 10/8/2021
+        </div>
+    </div>
+</body>

@@ -1,0 +1,27 @@
+﻿@page
+@model jacksvoboda.com.Pages.Fantasy.EditLoginModel
+@{
+}
+
+<h1>Login Page</h1>
+<div>
+    Enter your credentials here to continue on to the editing page.
+</div>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" class="form-control " />
+        <span class="text-danger" asp-validation-for="Username"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control " />
+        <span class="text-danger" asp-validation-for="Password"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Login</button>
+</form>
+<div>
+    <a class="btn btn-primary mt-2"
+       asp-page="./FantasyRankings">Return to Rankings Page</a>
+</div>
+

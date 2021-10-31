@@ -1,0 +1,24 @@
+﻿@page
+@model PhiKapStudyHours.Pages.HCI.HomeModel
+@{
+}
+<link rel="stylesheet" href="~/css/site.css">
+
+<body class="PhiKapp">
+    <h1>Active Member Home Page for @Model.user</h1>
+    <div>
+        <a class="btn PhiKapp2"
+           asp-page="./StudyHours">
+            Create a new Entry
+        </a>
+    </div>
+    <div>
+        Or Edit a Previoous Entry:
+        <select class="PhiKapp2">
+            @foreach (var entry in Model.entries)
+            { 
+                <option> @entry.Hours Hours | @entry.Name | @entry.Date</option>
+            }
+        </select>
+    </div>
+</body>
