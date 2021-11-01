@@ -123,13 +123,35 @@ namespace PhiKapStudyHours
                         while (reader.Read())
                         {
                             results.Add(new Entry((string)reader["Name"], (string)reader["Proctor"], (double)reader["Hours"], (DateTime)reader["Date"], (int)reader["Id"]));
-                            Console.WriteLine(results);
+                            Console.WriteLine(results[results.Count - 1]);
                         }
                     }
                 }
                 conn.Close();
             }
             return results[0];
+        }
+
+        public List<Entry> get_all_entries()
+        {
+            List<Entry> results = new List<Entry>();
+            using (var conn = new SqlConnection(Config.CONN)) //changes ip here
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("select * from Entries", conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            results.Add(new Entry((string)reader["Name"], (string)reader["Proctor"], (double)reader["Hours"], (DateTime)reader["Date"], (int)reader["Id"]));
+                            Console.WriteLine(results[results.Count - 1]);
+                        }
+                    }
+                }
+                conn.Close();
+            }
+            return results;
         }
 
         public List<string> get_students()

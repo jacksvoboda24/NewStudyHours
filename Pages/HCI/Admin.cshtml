@@ -4,47 +4,26 @@
 }
 <link rel="stylesheet" href="~/css/site.css">
 
-<header class="PhiKapp">
-    <img class="center-fit" src="~/images/PhiKappaThetaCrest.jpg" height="50" width="auto" />
-    <button>Home</button>
-    Logged in as: The Big Admin Man
-    <button>Log Out</button>
-</header>
 <body class="PhiKapp">
-    <h1>Admin Priveleges</h1>
+    <h1>Admin Home Page for @Model.user</h1>
     <div>
-        <ul>
-            <li>9/10 Sam Bell  		4 Hours 	Entered by: Jack Svoboda<button>Edit</button></li>
-            <li>8/27 Ian Krebs         	3 Hours 	Entered by: Jake Newman<button>Edit</button></li>
-            <li>8/10 Conner Collier 	5 Hours 	Entered by: Jack Svoboda<button>Edit</button></li>
-        </ul>
+        <a class="btn PhiKapp2"
+           asp-page="./StudyHours">
+            Create a new Entry
+        </a>
     </div>
     <div>
-        <table>
-            <TR>
-                <TD>9/10</TD>
-                <TD>Sam Bell</TD>
-                <TD>3 Hours</TD>
-                <TD>Entered by: Jack Svoboda</TD>
-                <TD><button>Edit</button></TD>
-            </TR>
-            <TR>
-                <TD>8/27</TD>
-                <TD>Ian Krebs</TD>
-                <TD>3 Hours</TD>
-                <TD>Entered by: Jake Newman</TD>
-                <TD><button>Edit</button></TD>
-            </TR>
-            <TR>
-                <TD>8/10</TD>
-                <TD>Conner Collier</TD>
-                <TD>5 Hours</TD>
-                <TD>Entered by: Jack Svoboda</TD>
-                <TD><button>Edit</button></TD>
-            </TR>
-        </table>
+        Or Edit a Previoous Entry:
+        <form method="post">
+            <select class="PhiKapp2" asp-for="@Model.edit_entry">
+                @foreach (var entry in Model.entries)
+                {
+                    <option value="@entry.Id">
+                        @entry.Hours Hours | @entry.Name | @entry.Date.ToString("ddd d MMM")
+                    </option>
+                }
+            </select>
+            <button type="submit" class="btn btn-primary mt-2">Edit</button>
+        </form>
     </div>
-    <form>
-
-    </form>
 </body>

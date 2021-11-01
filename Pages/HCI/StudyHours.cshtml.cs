@@ -26,6 +26,9 @@ namespace jacksvoboda.com.Pages.HCI
 
         [BindProperty]
         public DateTime date { get; set; }
+
+        [BindProperty]
+        public string title { get; set; }
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetString("Edit") == "No")
@@ -35,6 +38,8 @@ namespace jacksvoboda.com.Pages.HCI
                 date = DateTime.Today;
                 entry = new Entry();
                 entry.Proctor = user;
+                entry.Date = DateTime.Today;
+                title = "Create a new Entry";
                 return this.Page();
             }
             else
@@ -43,8 +48,8 @@ namespace jacksvoboda.com.Pages.HCI
                 entry = DataRefrence.get_entry_by_id(id);
                 Students = DataRefrence.get_students();
                 user = HttpContext.Session.GetString("CurrentUser");
-                date = entry.Date;
-                Console.WriteLine(date);
+                date = DateTime.Today;
+                title = "Edit an existing Entry";
                 return this.Page();
             }
         }

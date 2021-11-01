@@ -17,7 +17,7 @@
             <select class="PhiKapp2" asp-for="@Model.edit_entry">
                 @foreach (var entry in Model.entries)
                 {
-                    <option>
+                    <option value="@entry.Id">
                         @entry.Hours Hours | @entry.Name | @entry.Date.ToString("ddd d MMM")
                     </option>
                 }

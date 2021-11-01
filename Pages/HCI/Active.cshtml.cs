@@ -24,20 +24,31 @@ namespace PhiKapStudyHours.Pages.HCI
         public string user { get; set; }
 
         [BindProperty] 
-        public Entry edit_entry { get; set; }
+        public int edit_entry { get; set; }
         public IActionResult OnGet()
         {
-            user = HttpContext.Session.GetString("CurrentUser");
-            HttpContext.Session.SetString("Edit", "No");
-            entries = DataRefrence.get_entries_by_user(user);
-            return Page();
+            if (HttpContext.Session.GetString("IsLoggedIn") == "Yes")
+            {
+                var role = DataRefrence.get_role(HttpContext.Session.GetString("CurrentUser"));
+                role = role.Trim();
+                Console.WriteLine(role);
+                if (role == "Active")
+                {
+                    user = HttpContext.Session.GetString("CurrentUser");
+                    HttpContext.Session.SetString("Edit", "No");
+                    entries = DataRefrence.get_entries_by_user(user);
+                    return Page();
+                }
+            }
+            return RedirectToPage("/Index");
         }
 
         public IActionResult OnPost()
         {
-            string id = edit_entry.Id.ToString();
+            string id = edit_entry.ToString();
+            Console.WriteLine(id);
             HttpContext.Session.SetString("Edit", "Yes");
-            HttpContext.Session.SetString("Id", "1");
+            HttpContext.Session.SetString("Id", id);
             return RedirectToPage("./StudyHours");
         }
     }

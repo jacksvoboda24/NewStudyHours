@@ -25,14 +25,24 @@ namespace PhiKapStudyHours.Pages.HCI
         public List<Entry> entries { get; set; }
         public IActionResult OnGet()
         {
-            hours = DataRefrence.get_hours_for_student(HttpContext.Session.GetString("CurrentUser"));
-            if (hours > 8) { hours = 8; }
-            percent_hours = hours / 8;
-            width_hours = percent_hours * 100 + "%";
+            if (HttpContext.Session.GetString("IsLoggedIn") == "Yes")
+            {
+                var role = DataRefrence.get_role(HttpContext.Session.GetString("CurrentUser"));
+                role = role.Trim();
+                Console.WriteLine(role);
+                if (role == "Associate")
+                {
+                    hours = DataRefrence.get_hours_for_student(HttpContext.Session.GetString("CurrentUser"));
+                    if (hours > 8) { hours = 8; }
+                    percent_hours = hours / 8;
+                    width_hours = percent_hours * 100 + "%";
 
-            var user = HttpContext.Session.GetString("CurrentUser");
-            entries = DataRefrence.get_entries_by_student(user);
-            return Page();
+                    var user = HttpContext.Session.GetString("CurrentUser");
+                    entries = DataRefrence.get_entries_by_student(user);
+                    return Page();
+                }
+            }
+            return RedirectToPage("/Index");
         }
     }
 }

@@ -4,15 +4,15 @@
 }
 <link rel="stylesheet" href="~/css/site.css">
 <body class="PhiKapp">
-    <h1>Create New Entry</h1>
+    <h1>@Model.title</h1>
     <form method="post">
         <table>
             <tr>
                 <td>
-                    Student:
+                    Associate:
                 </td>
                 <td>
-                    <select asp-for="@Model.entry.Name" class="form-control">
+                    <select asp-for="@Model.entry.Name" value="@Model.entry.Name" class="form-control">
                         @foreach (var student in Model.Students)
                         {
                             <option>@student</option>
@@ -30,7 +30,10 @@
             </tr>
             <tr>
                 <td>
-                    @Model.user
+                    Proctor: 
+                </td>
+                <td>
+                    @Model.entry.Proctor
                 </td>
             </tr>
             <tr>
@@ -38,11 +41,11 @@
                     Date
                 </td>
                 <td>
-                    <input type="date" asp-for="@Model.entry.Date" value="@Model.date" />
+                    <input type="date" asp-for="@Model.entry.Date" max="@Model.date"/>
                 </td>
             </tr>
         </table>
-        <button type="submit" class="btn PhiKapp2 mt-2">Submit Entry</button>
+        <button type="submit" class="btn PhiKapp2 mt-2">Submit</button>
     </form>
 </body>
 
