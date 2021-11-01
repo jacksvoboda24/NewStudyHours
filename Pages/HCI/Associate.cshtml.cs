@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,11 +18,21 @@ namespace PhiKapStudyHours.Pages.HCI
 
         [BindProperty]
         public string width_hours { get; set; }
-        public void OnGet()
+
+        public IStudyData DataRefrence = new IStudyData();
+
+        [BindProperty]
+        public List<Entry> entries { get; set; }
+        public IActionResult OnGet()
         {
-            hours = 8;
+            hours = DataRefrence.get_hours_for_student(HttpContext.Session.GetString("CurrentUser"));
+            if (hours > 8) { hours = 8; }
             percent_hours = hours / 8;
             width_hours = percent_hours * 100 + "%";
+
+            var user = HttpContext.Session.GetString("CurrentUser");
+            entries = DataRefrence.get_entries_by_student(user);
+            return Page();
         }
     }
 }

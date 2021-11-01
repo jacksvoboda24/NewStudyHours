@@ -12,12 +12,14 @@
         width: 50%;
         height: 50px;
         border: 1px solid #000;
+        background-color: orangered
     }
 
     .progress-bar-fill {
         height: 100%;
         background: #4cff00;
         transition: width 0.5s;
+        color: forestgreen;
     }
     @* I am unsure why the progress bar is not becoming green, the background should set its color to that *@
 
@@ -28,27 +30,23 @@
     }
 </style>
 
-<header class="PhiKapp">
-    <img class="center-fit" src="~/images/PhiKappaThetaCrest.jpg" height="50" width="auto" />
-    <button>Home</button>
-    Logged in as: Jack Svoboda
-    <button>Log Out</button>
-</header>
 <body class="PhiKapp">
     <h1>Associate Member Home Page</h1>
     <div class="progress" style="width:400px; height:auto; color:black">
         <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="@Model.percent_hours"
-             aria-valuemin="0" aria-valuemax="100" style="width:@Model.width_hours">
+             aria-valuemin="0" aria-valuemax="100" style="width:@Model.width_hours; color:black; background-color:orangered">
             @Model.hours hours complete
         </div>
     </div>
     <div>
         Recently Approved Study Hours:
-        <div>
-            4.0 hours Ian Broyles 10/9/2021
-        </div>
-        <div>
-            0.5 hours Ian Broyles 10/8/2021
-        </div>
+        <table>
+            @foreach (var entry in Model.entries)
+            {
+                <tr>
+                    <td>@entry.Hours Hours | @entry.Name | @entry.Date.ToString("ddd d MMM")</td>
+                </tr>
+            }
+        </table>
     </div>
 </body>

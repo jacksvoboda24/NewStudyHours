@@ -1,14 +1,8 @@
-﻿@page
+﻿@page 
 @model jacksvoboda.com.Pages.HCI.StudyHoursModel
 @{
 }
 <link rel="stylesheet" href="~/css/site.css">
-<header class="PhiKapp">
-    <img class="center-fit" src="~/images/PhiKappaThetaCrest.jpg" height="50" width="auto" />
-    <button>Home</button>
-    Logged in as: Jack Svoboda
-    <button>Log Out</button>
-</header>
 <body class="PhiKapp">
     <h1>Create New Entry</h1>
     <form method="post">
@@ -31,7 +25,7 @@
                     Hours:
                 </td>
                 <td>
-                    <input type="number" min="0" max="8" asp-for="@Model.entry.Hours"/>
+                    <input type="number" step=".25" min="0" max="8" asp-for="@Model.entry.Hours"/>
                 </td>
             </tr>
             <tr>

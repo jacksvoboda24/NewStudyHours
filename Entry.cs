@@ -15,16 +15,19 @@ namespace PhiKapStudyHours
 
         public DateTime Date { get; set; }
 
+        public int Id { get; set; }
+
         public Entry()
         {
 
         }
-        public Entry (string name, string proctor, double hours, DateTime date)
+        public Entry (string name, string proctor, double hours, DateTime date, int id)
         {
             this.Name = name;
             this.Proctor = proctor;
             this.Hours = hours;
             this.Date = date;
+            this.Id = id;
         }
     }
 }

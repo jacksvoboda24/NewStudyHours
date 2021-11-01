@@ -23,7 +23,7 @@ namespace WebApplication2.Pages
         {
             if (HttpContext.Session.GetString("IsLoggedIn") == "Yes")
             {
-                var role = DataRefrence.get_role(Username);
+                var role = DataRefrence.get_role(HttpContext.Session.GetString("CurrentUser"));
                 role = role.Trim();
                 Console.WriteLine(role);
                 return RedirectToPage("./HCI/" + role);

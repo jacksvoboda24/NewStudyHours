@@ -28,12 +28,25 @@ namespace jacksvoboda.com.Pages.HCI
         public DateTime date { get; set; }
         public IActionResult OnGet()
         {
-            Students = DataRefrence.get_students();
-            user = HttpContext.Session.GetString("CurrentUser");
-            date = DateTime.Today;
-            entry = new Entry();
-            entry.Proctor = user;
-            return this.Page();
+            if (HttpContext.Session.GetString("Edit") == "No")
+            {
+                Students = DataRefrence.get_students();
+                user = HttpContext.Session.GetString("CurrentUser");
+                date = DateTime.Today;
+                entry = new Entry();
+                entry.Proctor = user;
+                return this.Page();
+            }
+            else
+            {
+                var id = Int32.Parse(HttpContext.Session.GetString("Id"));
+                entry = DataRefrence.get_entry_by_id(id);
+                Students = DataRefrence.get_students();
+                user = HttpContext.Session.GetString("CurrentUser");
+                date = entry.Date;
+                Console.WriteLine(date);
+                return this.Page();
+            }
         }
 
         public IActionResult OnPost()

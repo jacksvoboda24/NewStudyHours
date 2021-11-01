@@ -12,13 +12,17 @@
             Create a new Entry
         </a>
     </div>
-    <div>
-        Or Edit a Previoous Entry:
-        <select class="PhiKapp2">
-            @foreach (var entry in Model.entries)
-            { 
-                <option> @entry.Hours Hours | @entry.Name | @entry.Date</option>
-            }
-        </select>
+    <div>Or Edit a Previoous Entry:
+        <form method="post">
+            <select class="PhiKapp2" asp-for="@Model.edit_entry">
+                @foreach (var entry in Model.entries)
+                {
+                    <option>
+                        @entry.Hours Hours | @entry.Name | @entry.Date.ToString("ddd d MMM")
+                    </option>
+                }
+            </select>
+            <button type="submit" class="btn btn-primary mt-2">Edit</button>
+        </form>
     </div>
 </body>

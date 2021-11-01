@@ -22,11 +22,23 @@ namespace PhiKapStudyHours.Pages.HCI
 
         [BindProperty]
         public string user { get; set; }
+
+        [BindProperty] 
+        public Entry edit_entry { get; set; }
         public IActionResult OnGet()
         {
             user = HttpContext.Session.GetString("CurrentUser");
+            HttpContext.Session.SetString("Edit", "No");
             entries = DataRefrence.get_entries_by_user(user);
             return Page();
+        }
+
+        public IActionResult OnPost()
+        {
+            string id = edit_entry.Id.ToString();
+            HttpContext.Session.SetString("Edit", "Yes");
+            HttpContext.Session.SetString("Id", "1");
+            return RedirectToPage("./StudyHours");
         }
     }
 }
