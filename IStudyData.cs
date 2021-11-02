@@ -160,16 +160,19 @@ namespace PhiKapStudyHours
             using (var conn = new SqlConnection(Config.CONN)) //changes ip here
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("select * from Entries", conn))
+                using (SqlCommand cmd = new SqlCommand("select * from Study_Login", conn))
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            if(!results.Contains((string)reader["Name"]))
+                            if(reader["role"].ToString().Trim() == "Associate")
                             {
-                                results.Add((string)reader["Name"]);
-                            }
+                                if (!results.Contains((string)reader["username"]))
+                                {
+                                    results.Add((string)reader["username"]);
+                                }
+                            }                        
                         }
                     }
                 }

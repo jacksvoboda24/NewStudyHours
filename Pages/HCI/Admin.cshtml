@@ -19,7 +19,7 @@
                 @foreach (var entry in Model.entries)
                 {
                     <option value="@entry.Id">
-                        @entry.Hours Hours | @entry.Name | @entry.Date.ToString("ddd d MMM")
+                        @entry.Hours Hours | @entry.Name | @entry.Date.ToString("ddd d MMM") | Proctored by @entry.Proctor
                     </option>
                 }
             </select>
